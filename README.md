@@ -1,5 +1,7 @@
-J'ai réalisé le travail ci-dessous, vous trouverez dans le dossier /product_api_project le projet en Symfony 7 tout en respectant les contraintes mentionnées ci-dessous.
+J'ai réalisé le travail ci-dessous, vous trouverez dans le dossier /product_api_project le projet en Symfony 7 et React tout en respectant les contraintes mentionnées ci-dessous.
 
+## Front-end
+J'ai développé une application avec React qui permet d'afficher les produits gérés en backend.
 ## Back-end
 
 Développer un back-end permettant la gestion de produits définis plus bas.
@@ -7,7 +9,7 @@ Développer un back-end permettant la gestion de produits définis plus bas.
 - PHP/Symphony
 
 
-Le back-end doit gérer les API suivantes : 
+Le back-end gére les API suivantes : 
 
 | Resource           | POST                  | GET                            | PATCH                                    | PUT | DELETE           |
 | ------------------ | --------------------- | ------------------------------ | ---------------------------------------- | --- | ---------------- |
@@ -34,5 +36,3 @@ class Product {
   updatedAt: number;
 }
 ```
-
-Le back-end créé doit pouvoir gérer les produits dans une base de données SQL/NoSQL ou dans un fichier json.
