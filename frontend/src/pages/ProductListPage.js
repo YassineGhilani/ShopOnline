@@ -39,12 +39,16 @@ const ProductListpage = () => {
         <div>
             <header>            
                 <h1>Product List</h1>
-                <select value={selectedCategory} onChange={handleCategoryChange}>
-                    <option value='All'>Toutes les catégories</option>
-                    {categories.map((category) => (
-                        <option key={category} value={category}>{category}</option>
-                    ))}
-                </select>
+                <div className='select-container'>
+                    <label htmlFor="category-select">Séléctionner une catégorie</label>
+                    <select id='category-select' value={selectedCategory} onChange={handleCategoryChange}>
+                        <option value='All'>Toutes les catégories</option>
+                        {categories.map((category) => (
+                            <option key={category} value={category}>{category}</option>
+                        ))}
+                    </select>
+                </div>
+                
             </header>
             <div className='product-list'>
                 {products.length > 0 ? 

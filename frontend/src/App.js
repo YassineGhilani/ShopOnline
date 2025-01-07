@@ -4,6 +4,8 @@ import HomePage from './components/HomePage/HomePage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ProductListpage from './pages/ProductListPage';
+import AddProductPage from './pages/AddProductPage';
+import EditProductPage from './pages/EditProductPage';
 
 const App = () => (
   <Router>
@@ -11,6 +13,8 @@ const App = () => (
     <Routes>
       <Route path="/" element={<HomePage />}/>
       <Route path="/products" element={<ProductListpage />} />
+      <Route path="/add-product" element={<AddProductPage />} />
+      <Route path="/edit-product/:id" element={<EditProductPage />} />
     </Routes>
     <Footer />
   </Router>
