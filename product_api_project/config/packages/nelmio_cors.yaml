@@ -8,4 +8,4 @@ nelmio_cors:
         max_age: 3600
     paths:
         '^/': 
-            allow_origin: ['http://localhost:3000']
+            allow_origin: ['http://127.0.0.1:3000', 'http://localhost:3000']

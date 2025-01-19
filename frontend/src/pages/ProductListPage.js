@@ -1,10 +1,11 @@
-import React, { use, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { fetchProducts, fetchCategories, fetchProductsByCategory } from '../services/api';
 
 const ProductListpage = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [isLoading, setIsLoading] = useState(false);
 
     //Charger toutes les catégories au chargement du composant
 
@@ -17,17 +18,41 @@ const ProductListpage = () => {
     }, []);
 
     useEffect(() => {
-       const fetchProductsList = async () => {
-              try {
-                const response = selectedCategory !== 'All'
-                ? await fetchProductsByCategory(selectedCategory)
-                : await fetchProducts();
-                setProducts(response.data);
-              } catch (error) {
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                const [categoriesResponse, productsResponse] = await Promise.all([
+                    fetchCategories(),
+                    fetchProducts()
+                ]);
+                const categoryList = categoriesResponse.data.map((category) => category.category);
+                setCategories(categoryList);
+                setProducts(productsResponse.data);
+                
+            } catch (error) {
                 console.error('Error fetching products:', error);
-              }
-         };
-         fetchProductsList();
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        if(selectedCategory === 'All')  return;
+
+        const fetchProductsByCategoryList = async (category) => {
+            setIsLoading(true);
+            try {
+                const response = await fetchProductsByCategory(category);
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchProductsByCategoryList(selectedCategory);
     }, [selectedCategory]);
 
     // Gestion du chargement de catégories
@@ -51,17 +76,18 @@ const ProductListpage = () => {
                 
             </header>
             <div className='product-list'>
-                {products.length > 0 ? 
+                {isLoading ? <p>Loading...</p> :
+                products.length > 0 ? 
                     ( products.map((product) => (
                     <div className='product-card' key={product.id}>
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <p><strong>Prix: </strong> {product.price}€</p>
+                        <a className='link-to-product' href={ `/products/${product.id}` }>
+                            <h3>{product.name}</h3>
+                            <p>{product.description}</p>
+                            <p><strong>Prix: </strong> {product.price}€</p>
+                        </a>
                         <button>Ajouter au panier</button>
                     </div>
-                
-                    
-            ))
+                ))
         ) : (
             <p>Aucun produit trouvé.</p>
         )}

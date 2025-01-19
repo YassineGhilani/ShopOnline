@@ -64,7 +64,7 @@ const AddProductPage = () => {
 
 
 return (
-    <div className="edit-page container" style={{maxWidth: '600px', margin: '0 auto', padding: '20px'}}>
+    <div className="add-page edit-add-product container" style={{maxWidth: '600px', margin: '0 auto', padding: '20px'}}>
         <h2>Ajouter un produit</h2>
         {error && <p style={{color: 'red'}}>{error}</p>}
         <form onSubmit={handleSubmit}>

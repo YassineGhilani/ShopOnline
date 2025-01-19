@@ -13,11 +13,21 @@
 }
 
 /* Logo */
-.logo h1 {
+.logo span {
     font-size: 2rem;
     font-weight: bold;
     color: #ecf0f1;
     margin: 0;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #ecf0f1;
+}
+
+.logo a:hover {
+    text-decoration: none;
+    color: #1abc9c;
 }
 
 /* Navigation */
@@ -63,20 +73,73 @@
     background-color: #16a085;
 }
 
+#menuToggle {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuToggle input {
+    display: flex;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+}
+
+
+
+#menuToggle span.open-span,
+#menuToggle span.closed-span {
+    font-size: 30px;
+    width: 40px;
+}
+
+#menuToggle span.open-span {
+    color: #2c3e50;
+}
+
+#menu {
+    position: absolute;
+    width: 180px;
+    height: 400px;
+    box-shadow: 0 0 10px #85888C;
+    margin: -50px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    background-color: #F5F6FA;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+    transform: translate(-110%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menuToggle input:checked~ul {
+    transform: none;
+}
+
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .header {
         padding: 1rem;
     }
+
     .header-nav {
         width: 100%;
     }
+
     .header-nav ul {
         justify-content: space-between;
     }
-    
+
     .header {
-        flex-direction: column;
+        flex-direction: row-reverse;
         align-items: flex-start;
     }
 
@@ -90,23 +153,31 @@
         margin-top: 1rem;
     }
 
-    
-    .mobile-menu-content ul{
+
+    #menu {
+        display: block;
         list-style: none;
         padding: 0;
         margin: 0;
     }
-    .mobile-menu-content ul li{
+
+    #menu li {
         margin: 0.5rem 0;
     }
-    .mobile-menu-content ul li a{
+
+    #menu li a {
         color: #1abc9c;
         text-decoration: none;
         font-size: 1rem;
         font-weight: 500;
     }
-    
-    .mobile-menu-content.open {
+
+    #menu.open {
         display: block;
     }
+
+    #menuToggle label[for="menu-checkbox"] {
+        z-index: 1;
+    }
+
 }

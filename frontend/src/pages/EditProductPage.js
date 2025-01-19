@@ -75,7 +75,7 @@ const EditProductPage = () => {
     }
 
     return (
-        <div className='add-product container'> 
+        <div className='edit-product edit-add-product container'> 
             <header>
                 <h1>Modifier le produit</h1>
             </header>
